@@ -38,6 +38,8 @@ Given that the mushrooms in the dataset are either classified as 'edible' or 'po
 1. Exploratory Data Analysis
 2. Predicting classifications of mushrooms
 
+I have performed my analysis in a Python Jupyter notebook, [mushroom_classification.ipynb](https://github.com/awesomecosmos/Mushroom-Classification/blob/main/mushroom_classification.ipynb).
+
 ## Algorithms
 
 In order to predict the binary classifications, I used a range of algorithms, and chose the best algorithm (discussed later). Here are the algorithms I used:
