@@ -4,7 +4,7 @@ This is a fun project to apply the Exploratory Data Analysis (EDA) process and n
 
 <img src="img/mushrooms.jpg">
 
-# Key finding: coming soon!
+# Key finding: The K-Nearest Neighbors model (accuracy 99.63%) or the linear Support Vector Classifier model (accuracy 97.27%) should be used to classify poisonous mushrooms! Also pay attention to a mushroom's veil color, gill size, bruises, and ring type, since they can be indicators of a poisonous mushroom!
 
 ## Authors
 
@@ -16,7 +16,7 @@ This is a fun project to apply the Exploratory Data Analysis (EDA) process and n
   - [Data Source](#data-source)
   - [Analysis Methods](#analysis-methods)
   - [Algorithms](#algorithms)
-  - [Results](#results)
+  - [tl;dr - Results](#tldr-results)
   - [Discussion](#discussion)
   
 ## Introduction
@@ -51,10 +51,60 @@ In order to predict the binary classifications, I used a range of algorithms, an
 - K-Nearest Neighbors
 - XGBoost
 
-## Results
+## TLDR Results
 
-[coming soon!]
+Of the seven algorithms that were used to classify the mushrooms, 3 had overfitted the model, and so were discarded for final analysis. Of the four models that remained (Naive Bayes, Logistic Regression, SVC, and K-Nearest Neighbors), KNN and SVC were found to have the highest precision and recall (>96%). The most important features that contribute to a mushroom being poisonous according to the SVC model were found to be the veil color, gill size, bruises, and ring type of the mushrooms.
 
 ## Discussion
 
-[coming soon!]
+For this project, our aim is to find the best possible algorithm which classifies a mushroom as either edible or poisonous. We used 7 algorithms and evailuated their performances. Now we will discuss a few evaluation metrics to judge the best algorithm that should be used to predict mushroom classifications. But first, some terminology! Most evaluation metrics are defined in terms of positives and negatives, as seen in the confusion matrices. In our confusion matrix for our binary classification problem, a positive is defined as 1, which corresponds to poisonous mushrooms. Therefore, the negative class corresponds to 0, which are edible mushrooms. This tells us that our models are finding which mushrooms are poisonous (which is the hypothesis), rather than the other way round. Therefore, here is some more terminology before we define the evaluation metrics:
+
+- TP (True Positives): how many data points were correctly classified as poisonous (actual = 'p', predicted = 'p').
+- FP (False Positives): how many data points were incorrectly classified as poisonous (actual = 'e', predicted = 'p').
+- FN (False Negatives): how many data points were incorrectly classified as edible (actual = 'p', predicted = 'e').
+- TN (True Negatives): how many data points were correctly classified as edible (actual = 'e', predicted = 'e').
+
+**Accuracy**
+Accuracy is defined as follows: $\frac{TP+TN}{TP+TN+FP+FN}$
+
+- The accuracy metric is good for a balanced dataset (which we have), and for when every class is important.
+
+**Precision**
+Precision is defined as follows: $\frac{TP}{TP+FP}$
+
+- The precision metric is good for measuring how often class 'p' is indeed classified as class 'p', i.e. maximizing on TPs. 
+- In our case, this is a good metric to compare our models on, since we need to correctly predict poisonous mushrooms as poisonous, instead of edible, since it can lead to bad things for humans!
+
+**Recall**
+Recall is defined as follows: $\frac{TP}{TP+FN}$
+
+- The recall metric is good for measuring how often class 'e' is indeed classified as class 'e', i.e. maximizing TNs.
+- This is also a good metric to compare our models, since we also want correctly-classified edible mushrooms!
+
+**F1 Score**
+F1 Score is defined as follows: $2\times \frac{precision\times recall}{precision + recall}$
+
+- The F1 metric is referred to as a 'harmonic mean between precision and recall'. 
+- This means that it is a good metric to measure how often edible mushrooms and poisonous mushrooms are each correctly classified.
+
+**ROC/AUC Score**
+- The ROC (Receiver Operating Characteristic) curve is a graph of the TP rate vs the FP rate.
+- The AUC (Area Under Curve) score is a measure of the area under the ROC curve.
+- The ROC/AUC score is good for measuring the probability of good predictions made for both edible and poisonous mushrooms.
+
+
+After looking at all these metrics, we will define our primary metric as precision, since we are interested in minimizing the chance of eating poisonous mushrooms, which will only happen if most of the poisonous samples in the dataset are correctly classified.
+
+One more thing before we start evaluating our models - we note that a few algorithms provided 100% on each metric. This shows that these models have likely overfitted, i.e. the model learned specific rules from the training data and was able to apply those to the testing dataset as-is. We will disregard these overfitted models (Random Forest, Decision Tree, K-Nearest Neighbours, and XGBoost) for final evaluation.
+
+Ok, now we have enough background to start evaluating our models. Once more, let's look at the performance metrics table, after filtering out the overfitted models, based on accuracy.
+
+Based on our primary metric, precision, we find that the KNN model has performed the best, followed by SVC (linear kernel), followed by logistic regression. The least precise model was Naive Bayes. The KNN model provided 99% precision, SVC provided 98% precision, logistic regression provided 94% precision, and finally Naive Bayes provided 90% precision. This indicates that the KNN model classified 99% of all poisonous mushrooms as poisonous.
+
+We find that the other metrics also have similar performances, with KNN performing the best, followed by SVC, then logistic regression, then Naive Bayes. However, in terms of recall, we find that KNN has 100% recall, which shows that it correctly classified 100% of edible mushrooms as edible. Interesting!
+
+**Based on the extensive analysis performed and comparison of metrics, we will conclude that a K-Nearest Neighbours algorithm, or a Support Vector Classifier model should be used to classify this dataset.**
+
+So then what are the features that make a mushrooms poisonous anyway? According to the SVC model, the **top features that contribute to a mushroom being poisonous are its veil color, gill size, bruises, and the ring type**. The features that contributed least to the classification include gill spacing, stalk root, stalk shape, gill attachment, and ring number, just to name a few.
+
+Therefore, to conclude this analysis, if I had an algorithm with me while I was in the forest exploring mushrooms that told me the likelihood of a mushroom being poisonous or not, I would go with either the KNN algorithm, or the SVC algorithm. I would also pay close attention to the veil color, gill size, bruises, and ring type of the mushrooms to corroborate the algorithm's predictions. ¯/\_(ツ)_/¯
