@@ -55,6 +55,15 @@ In order to predict the binary classifications, I used a range of algorithms, an
 
 Of the seven algorithms that were used to classify the mushrooms, 3 had overfitted the model, and so were discarded for final analysis. Of the four models that remained (Naive Bayes, Logistic Regression, SVC, and K-Nearest Neighbors), KNN and SVC were found to have the highest precision and recall (>96%). The most important features that contribute to a mushroom being poisonous according to the SVC model were found to be the veil color, gill size, bruises, and ring type of the mushrooms.
 
+<img src="img/metrics.jpeg"> 
+These are the model evaluation metrics for each of the 7 models used.
+
+<img src="img/roc_auc.png"> 
+These are the ROC curves and AUC scores for each of the 7 models.
+
+<img src="img/svc.png"> 
+These are the feature importances for poisonous mushrooms, according to the SVC model.
+
 ## Discussion
 
 For this project, our aim is to find the best possible algorithm which classifies a mushroom as either edible or poisonous. We used 7 algorithms and evailuated their performances. Now we will discuss a few evaluation metrics to judge the best algorithm that should be used to predict mushroom classifications. But first, some terminology! Most evaluation metrics are defined in terms of positives and negatives, as seen in the confusion matrices. In our confusion matrix for our binary classification problem, a positive is defined as 1, which corresponds to poisonous mushrooms. Therefore, the negative class corresponds to 0, which are edible mushrooms. This tells us that our models are finding which mushrooms are poisonous (which is the hypothesis), rather than the other way round. Therefore, here is some more terminology before we define the evaluation metrics:
