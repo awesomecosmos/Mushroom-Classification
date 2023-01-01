@@ -58,10 +58,10 @@ Of the seven algorithms that were used to classify the mushrooms, 3 had overfitt
 <img src="img/metrics.jpeg"> 
 These are the model evaluation metrics for each of the 7 models used.
 
-<img src="img/roc_auc.png"> 
+<img src="img/roc_auc.jpeg"> 
 These are the ROC curves and AUC scores for each of the 7 models.
 
-<img src="img/svc.png"> 
+<img src="img/svc.jpeg"> 
 These are the feature importances for poisonous mushrooms, according to the SVC model.
 
 ## Discussion
